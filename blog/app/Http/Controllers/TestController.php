@@ -29,8 +29,11 @@ class TestController extends Controller
         return redirect()->route('ret');
     }
     function upd(Request $request){
+        dump($request->all());
         $res = $request->all();
-        $article=new Article();
+        // $article=new Article();
+        // Article::update()
+
     }
     function show(){
         $articles=Article::all()->toArray();

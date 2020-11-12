@@ -2,7 +2,7 @@
 <form action="rec" method="post">
 @csrf
 <input type="title" name='title' id='tt' placeholder='title'>
-<input type="text" name='text' placeholder='text'>
+<input type="text" name='text' id='txt' id placeholder='text'>
 <input type="submit" value="submit">
 </form>
 <form action="upd" method="post">
@@ -35,6 +35,7 @@
             </form>
         </td>
         <td>        
+            <form action="" method="post">
                 <input type="button" class='upd' value="update"> 
         </td>
 
@@ -48,17 +49,17 @@ console.log('java')
 let e = document.getElementsByClassName('upd')
 for(i=0;i<e.length;i++){
     e[i].addEventListener('click', function(){
-        let num = this.parentElement.parentElement.innerText;
-        num = num.split('');
-        let nnum;
-        num.forEach(function(item, i, arr){
-            console.log(arr[i])
-            if(arr[i] == '/[0-9]/'){
-                nnum += arr[i];
-                console.log('a')
-            }
-            // console.log(nnum)
-        })
+        let num = this.parentElement.parentElement.firstChild.nextSibling.innerText;
+        console.log(num);
+        var request = new XMLHttpRequest();
+            request.open('POST', 'upd', true);
+            request.setRequestHeader('accept', 'application/json');
+
+                // Это простой способ подготавливить данные для отправки (все браузеры и IE > 9)
+                var formData = [num, document.getElementById('tt'), document.getElementById('txt')];
+
+                // Отправляем данные
+                request.send(formData);
     })
 }
 </script>
