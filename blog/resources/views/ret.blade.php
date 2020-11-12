@@ -35,8 +35,13 @@
             </form>
         </td>
         <td>        
-            <form action="" method="post">
-                <input type="button" class='upd' value="update"> 
+            <form action="upd" method="post">
+                @csrf
+                <input type="submit" class='upd' value="update"> 
+                <input type="text" name='text'>
+                <input type="text" name='title'>
+                <input type="text" name='id' hidden>
+            </form>
         </td>
 
         </tr>
@@ -49,17 +54,11 @@ console.log('java')
 let e = document.getElementsByClassName('upd')
 for(i=0;i<e.length;i++){
     e[i].addEventListener('click', function(){
-        let num = this.parentElement.parentElement.firstChild.nextSibling.innerText;
+        let num = this.parentElement.parentElement.parentElement.firstChild.nextSibling.innerText;
         console.log(num);
-        var request = new XMLHttpRequest();
-            request.open('POST', 'upd', true);
-            request.setRequestHeader('accept', 'application/json');
-
-                // Это простой способ подготавливить данные для отправки (все браузеры и IE > 9)
-                var formData = [num, document.getElementById('tt'), document.getElementById('txt')];
-
-                // Отправляем данные
-                request.send(formData);
+        var formData = [num];
+        let id = this.nextElementSibling.nextElementSibling.nextElementSibling;
+        id.value = formData
     })
 }
 </script>

@@ -15,7 +15,6 @@ class TestController extends Controller
         $res = $request->all();
         unset($res['_token']);
         unset($res['submit']);
-        // var_dump(Article::all()->toArray());
         $ttlsInDB=[];
         forEach(Article::all()->toArray() as $el){
             echo $el['title'];
@@ -31,8 +30,11 @@ class TestController extends Controller
     function upd(Request $request){
         dump($request->all());
         $res = $request->all();
-        // $article=new Article();
-        // Article::update()
+        $article = Article::find($request['id'], 'id');
+        $article->title = $request['title'];
+        $article->text = $request['text'];
+        $article->save();
+        return redirect()->route('ret');
 
     }
     function show(){
